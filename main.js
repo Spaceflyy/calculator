@@ -1,44 +1,121 @@
-let buttons = document.querySelectorAll('button');
+let numberButtons = document.querySelectorAll('button.number');
+let operatorButtons = document.querySelectorAll('button.operator');
+let clearButton = document.querySelector('#AC');
+let display = document.querySelector('#display');
+let deleteButton = document.querySelector('#DEL');
 let displayValue= '';
-buttons.forEach((b)=>{
-   b.addEventListener('click', function(){
+let number1 = 0;
+let number2 = 0;
+let op='';
 
-      if(this.classList.value !== "operator"){
-         populateDisplay(this.id);
+operatorButtons.forEach((btn)=>{
+   btn.addEventListener('click', function ()
+   {
+      if(number1 == 0)
+      {
+         number1 = Number(displayValue);
+         console.log(typeof number1);
+         op = this.id;
+         display.innerHTML= '';
+         displayValue = '';
+      }else
+      {
+         number2 = Number(displayValue);
+         operate(op,number1,number2);
+
       }
-   
+   });
+
+});
+
+numberButtons.forEach((b)=>{
+   b.addEventListener('click', function() 
+   {
+      populateDisplay(this.id);   
    });
 });
 
+clearButton.addEventListener('click',() =>{
+   number1 = 0;
+   number2 = 0;
+   displayValue = ''; 
+   display.innerHTML = '';
 
+});
+
+deleteButton.addEventListener('click', () => {
+
+   displayValue = displayValue.slice(0,-1);
+   updateDisplay();
+});
 
 function populateDisplay(buttonID)
 {
    displayValue += buttonID;
-   document.querySelector("#display").textContent = displayValue;
+   updateDisplay();
 }
 
-function add()
+function updateDisplay()
 {
+   display.textContent = displayValue;
+
+
+}
+
+function add(num1, num2)
+{
+   
+   return num1+num2;
 
 };
 
-function subtract()
+function subtract(num1, num2)
 {
-
+   return num1-num2;
 };
 
-function multiply()
+function multiply(num1, num2)
 {
-
+   return num1*num2;
 };
 
-function divide()
+function divide(num1, num2)
 {
-
+   return num1/num2;
 };
 
 function operate(operator, num1, num2)
 {
+console.log(operator);
 
+   switch (operator)
+   {
+      case '+':
+         {
+            displayValue = add(num1,num2);
+            updateDisplay();
+            break;
+         }
+
+      case '-':
+         {
+            displayValue = subtract(num1,num2);
+            updateDisplay();
+            break;
+         }
+
+      case '/':
+         {
+            displayValue = divide(num1,num2);
+            updateDisplay();
+            break;
+         }
+
+      case '*':
+         {
+            displayValue = multiply(num1,num2);
+            updateDisplay();
+            break;
+         }
+   }
 };
