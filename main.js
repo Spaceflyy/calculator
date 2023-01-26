@@ -6,38 +6,53 @@ let deleteButton = document.querySelector('#DEL');
 let displayValue= '';
 let number1 = 0;
 let number2 = 0;
+let result = 0;
 let op='';
 
 operatorButtons.forEach((btn)=>{
-   btn.addEventListener('click', function ()
+   btn.addEventListener('click', function (e)
    {
-      if(number1 == 0)
+      if (e.target.textContent !== '=' )
       {
-         number1 = Number(displayValue);
-         console.log(typeof number1);
-         op = this.id;
-         display.innerHTML= '';
-         displayValue = '';
+         if(number1 == 0)
+         {
+            number1 = displayValue;
+            op = e.target.textContent;
+            display.innerHTML= '';
+            displayValue = '';
+
+         } else
+         {
+            number1 =result;
+            console.log(number1);
+            op =e.target.textContent;
+            display.innerHTML= '';
+            displayValue = '';
+            
+         }
       }else
       {
-         number2 = Number(displayValue);
+         number2 = displayValue;
          operate(op,number1,number2);
-
+         op ='';
       }
+
    });
 
 });
 
 numberButtons.forEach((b)=>{
-   b.addEventListener('click', function() 
+   b.addEventListener('click', function(e) 
    {
-      populateDisplay(this.id);   
+      populateDisplay(e.target.textContent);   
    });
 });
 
 clearButton.addEventListener('click',() =>{
    number1 = 0;
    number2 = 0;
+   result = 0;
+   op = ''
    displayValue = ''; 
    display.innerHTML = '';
 
@@ -64,9 +79,7 @@ function updateDisplay()
 
 function add(num1, num2)
 {
-   
    return num1+num2;
-
 };
 
 function subtract(num1, num2)
@@ -86,12 +99,14 @@ function divide(num1, num2)
 
 function operate(operator, num1, num2)
 {
-console.log(operator);
+   num1 = Number(num1);
+   num2 = Number(num2);
 
    switch (operator)
    {
       case '+':
          {
+            result = add(num1,num2);
             displayValue = add(num1,num2);
             updateDisplay();
             break;
@@ -99,6 +114,7 @@ console.log(operator);
 
       case '-':
          {
+            result = subtract(num1,num2);
             displayValue = subtract(num1,num2);
             updateDisplay();
             break;
@@ -106,6 +122,7 @@ console.log(operator);
 
       case '/':
          {
+            result = divide(num1,num2);
             displayValue = divide(num1,num2);
             updateDisplay();
             break;
@@ -113,9 +130,11 @@ console.log(operator);
 
       case '*':
          {
+            result = multiply(num1,num2);
             displayValue = multiply(num1,num2);
             updateDisplay();
             break;
          }
+
    }
 };
