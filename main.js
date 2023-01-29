@@ -18,7 +18,7 @@ operatorButtons.forEach((btn)=>{
          {
             number1 = displayValue;
             op = e.target.textContent;
-            display.innerHTML= '';
+            display.innerHTML= number1;
             displayValue = '';
 
          } else
@@ -27,7 +27,7 @@ operatorButtons.forEach((btn)=>{
             operate(op,number1,number2);
             number1 = displayValue;
             op =e.target.textContent;
-            display.innerHTML= '';
+            display.innerHTML= number1;
             displayValue = '';
             
          }
@@ -55,7 +55,7 @@ clearButton.addEventListener('click',() =>{
    number2 = 0;
    op = ''
    displayValue = ''; 
-   display.innerHTML = '';
+   display.innerHTML = 0;
 
 });
 
