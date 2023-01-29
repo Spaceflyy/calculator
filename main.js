@@ -3,10 +3,10 @@ let operatorButtons = document.querySelectorAll('button.operator');
 let clearButton = document.querySelector('#AC');
 let display = document.querySelector('#display');
 let deleteButton = document.querySelector('#DEL');
+
 let displayValue= '';
 let number1 = 0;
 let number2 = 0;
-let result = 0;
 let op='';
 
 operatorButtons.forEach((btn)=>{
@@ -23,8 +23,9 @@ operatorButtons.forEach((btn)=>{
 
          } else
          {
-            number1 =result;
-            console.log(number1);
+            number2 = displayValue;
+            operate(op,number1,number2);
+            number1 = displayValue;
             op =e.target.textContent;
             display.innerHTML= '';
             displayValue = '';
@@ -34,7 +35,8 @@ operatorButtons.forEach((btn)=>{
       {
          number2 = displayValue;
          operate(op,number1,number2);
-         op ='';
+         number1 = displayValue;
+         op = '';
       }
 
    });
@@ -51,7 +53,6 @@ numberButtons.forEach((b)=>{
 clearButton.addEventListener('click',() =>{
    number1 = 0;
    number2 = 0;
-   result = 0;
    op = ''
    displayValue = ''; 
    display.innerHTML = '';
@@ -60,7 +61,7 @@ clearButton.addEventListener('click',() =>{
 
 deleteButton.addEventListener('click', () => {
 
-   displayValue = displayValue.slice(0,-1);
+   displayValue = String(displayValue).slice(0,-1);
    updateDisplay();
 });
 
@@ -106,15 +107,13 @@ function operate(operator, num1, num2)
    {
       case '+':
          {
-            result = add(num1,num2);
-            displayValue = add(num1,num2);
+            displayValue =  add(num1,num2);
             updateDisplay();
             break;
          }
 
       case '-':
          {
-            result = subtract(num1,num2);
             displayValue = subtract(num1,num2);
             updateDisplay();
             break;
@@ -122,7 +121,6 @@ function operate(operator, num1, num2)
 
       case '/':
          {
-            result = divide(num1,num2);
             displayValue = divide(num1,num2);
             updateDisplay();
             break;
@@ -130,7 +128,6 @@ function operate(operator, num1, num2)
 
       case '*':
          {
-            result = multiply(num1,num2);
             displayValue = multiply(num1,num2);
             updateDisplay();
             break;
