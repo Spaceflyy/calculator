@@ -3,6 +3,7 @@ let operatorButtons = document.querySelectorAll('button.operator');
 let clearButton = document.querySelector('#AC');
 let display = document.querySelector('#mainDisplay');
 let deleteButton = document.querySelector('#DEL');
+let miniDisplay = document.querySelector('#miniDisplay');
 
 let displayValue= '';
 let number1 = 0;
@@ -19,6 +20,7 @@ operatorButtons.forEach((btn)=>{
             number1 = displayValue;
             op = e.target.textContent;
             display.innerHTML= number1;
+            miniDisplay.textContent = `${number1} ${op}`;
             displayValue = '';
 
          } else
@@ -27,6 +29,7 @@ operatorButtons.forEach((btn)=>{
             operate(op,number1,number2);
             number1 = displayValue;
             op =e.target.textContent;
+            miniDisplay. textContent = `${number1} ${op}`;
             display.innerHTML= number1;
             displayValue = '';
             
@@ -35,7 +38,9 @@ operatorButtons.forEach((btn)=>{
       {
          number2 = displayValue;
          operate(op,number1,number2);
+         miniDisplay.textContent = `${number1} ${op} ${number2} =`;
          number1 = displayValue;
+
          op = '';
       }
 
@@ -46,6 +51,7 @@ operatorButtons.forEach((btn)=>{
 numberButtons.forEach((b)=>{
    b.addEventListener('click', function(e) 
    {
+
       populateDisplay(e.target.textContent);   
    });
 });
@@ -56,6 +62,7 @@ clearButton.addEventListener('click',() =>{
    op = ''
    displayValue = ''; 
    display.innerHTML = 0;
+   miniDisplay.textContent = '';
 
 });
 

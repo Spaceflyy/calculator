@@ -48,17 +48,20 @@ body{
 #displayContainer #miniDisplay
 {
     display:flex;
+    flex:1;
     justify-content: end;
     font-size: 25px;
-    border:orange 2px solid;
+    padding:0;
 }
 
 #displayContainer #mainDisplay
 {
     display:flex;
+    flex:2;
     justify-content: end;
     font-size: 40px;
-    border:  red 2px solid;
+    padding:0;
+
 }
 #buttonContainer
 {
