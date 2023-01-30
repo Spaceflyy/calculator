@@ -1,7 +1,7 @@
 let numberButtons = document.querySelectorAll('button.number');
 let operatorButtons = document.querySelectorAll('button.operator');
 let clearButton = document.querySelector('#AC');
-let display = document.querySelector('#display');
+let display = document.querySelector('#mainDisplay');
 let deleteButton = document.querySelector('#DEL');
 
 let displayValue= '';
