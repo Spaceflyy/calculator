@@ -5,10 +5,12 @@ let display = document.querySelector('#mainDisplay');
 let deleteButton = document.querySelector('#DEL');
 let miniDisplay = document.querySelector('#miniDisplay');
 
+
 let displayValue= '';
 let number1 = 0;
 let number2 = 0;
 let op='';
+
 
 operatorButtons.forEach((btn)=>{
    btn.addEventListener('click', function (e)
@@ -36,12 +38,13 @@ operatorButtons.forEach((btn)=>{
          }
       }else
       {
-         number2 = displayValue;
-         operate(op,number1,number2);
-         miniDisplay.textContent = `${number1} ${op} ${number2} =`;
-         number1 = displayValue;
-
-         op = '';
+         if (op !== ''){
+            number2 = displayValue;
+            operate(op,number1,number2);
+            miniDisplay.textContent = `${number1} ${op} ${number2} =`;
+            number1 = displayValue;
+            op = '';
+         }
       }
 
    });
@@ -51,20 +54,28 @@ operatorButtons.forEach((btn)=>{
 numberButtons.forEach((b)=>{
    b.addEventListener('click', function(e) 
    {
+      if(e.target.textContent == '.' && displayValue.includes('.'))
+      {
 
-      populateDisplay(e.target.textContent);   
+      } else  
+      {    
+         populateDisplay(e.target.textContent);   
+      }
    });
 });
 
-clearButton.addEventListener('click',() =>{
+
+function clearAll()
+{
    number1 = 0;
    number2 = 0;
    op = ''
    displayValue = ''; 
    display.innerHTML = 0;
    miniDisplay.textContent = '';
+}
 
-});
+clearButton.addEventListener('click',clearAll);
 
 deleteButton.addEventListener('click', () => {
 
@@ -128,7 +139,14 @@ function operate(operator, num1, num2)
 
       case '/':
          {
+            if(num1 !== 0 && num2 !== 0)
+            {
             displayValue = divide(num1,num2);
+            } else
+            {
+               alert("Cannot divide by 0");
+               clearAll();
+            }
             updateDisplay();
             break;
          }
