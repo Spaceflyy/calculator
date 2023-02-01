@@ -54,12 +54,13 @@ operatorButtons.forEach((btn)=>{
 numberButtons.forEach((b)=>{
    b.addEventListener('click', function(e) 
    {
+      populateDisplay(e.target.textContent);   
       if(e.target.textContent == '.' && displayValue.includes('.'))
       {
-
-      } else  
-      {    
-         populateDisplay(e.target.textContent);   
+         console.log(document.getElementById('.').disabled = true);
+      }  else 
+      {
+         document.getElementById('.').disabled= false;
       }
    });
 });
