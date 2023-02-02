@@ -11,7 +11,6 @@ let number1 = 0;
 let number2 = 0;
 let op='';
 
-
 operatorButtons.forEach((btn)=>{
    btn.addEventListener('click', function (e)
    {
@@ -21,21 +20,24 @@ operatorButtons.forEach((btn)=>{
          {
             number1 = displayValue;
             op = e.target.textContent;
-            display.innerHTML= number1;
             miniDisplay.textContent = `${number1} ${op}`;
-            displayValue = '';
+            display.innerHTML = '';
 
-         } else
+         } else if(display.innerHTML == '')
          {
-            number2 = displayValue;
+            op = e.target.textContent;
+            miniDisplay.textContent = `${number1} ${op}`;
+         }else
+         {
+            number2 =displayValue;
             operate(op,number1,number2);
+            op = e.target.textContent;
             number1 = displayValue;
-            op =e.target.textContent;
             miniDisplay. textContent = `${number1} ${op}`;
             display.innerHTML= number1;
-            displayValue = '';
-            
+            display.innerHTML = '';
          }
+         displayValue = '';
       }else
       {
          if (op !== ''){
@@ -48,7 +50,6 @@ operatorButtons.forEach((btn)=>{
       }
 
    });
-
 });
 
 numberButtons.forEach((b)=>{
