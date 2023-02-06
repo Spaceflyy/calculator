@@ -14,7 +14,7 @@ let op='';
 operatorButtons.forEach((btn)=>{
    btn.addEventListener('click', function (e)
    {
-      if (e.target.textContent !== '=' )
+      if (e.target.textContent !== '=')
       {
          if(number1 == 0)
          {
@@ -23,7 +23,7 @@ operatorButtons.forEach((btn)=>{
             miniDisplay.textContent = `${number1} ${op}`;
             display.innerHTML = '';
 
-         } else if(display.innerHTML == '')
+         } else if(displayValue == '')
          {
             op = e.target.textContent;
             miniDisplay.textContent = `${number1} ${op}`;
